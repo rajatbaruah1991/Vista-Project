@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/global.css';
+
+// Dynamically import all webp images from the gallery directory
+const images = import.meta.glob('../assets/gallery/*.webp', { eager: true });
+const imageAssets = Object.values(images).map((img: any) => img.default);
+---
+
+<MainLayout title="Gallery | Vista Educare" activePage="gallery">
+  <!-- ═══════════ HEADER ═══════════ -->
+  <section class="pt-32 pb-16 bg-gradient-to-br from-navy to-dark min-h-[40vh] flex flex-col justify-center relative overflow-hidden noise-overlay">
+    <!-- Orbs -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-red/20 rounded-full blur-[120px] animate-orb"></div>
+      <div class="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-indigo/20 rounded-full blur-[120px] animate-orb-reverse"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight reveal">
+        Our <span class="text-red">Gallery</span>
+      </h1>
+      <p class="text-white/60 text-lg max-w-2xl mx-auto reveal" style="transition-delay: 0.1s">
+        Glimpses of life at Vista Educare — where learning meets innovation and community.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ GALLERY GRID ═══════════ -->
+  <section class="py-24 bg-light min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="gallery-grid">
+        {imageAssets.map((img, i) => (
+          <div class="break-inside-avoid reveal relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-navy/20 transition-all duration-500 cursor-pointer" style={`transition-delay: ${(i % 10) * 0.05}s`} title="View Image" data-gallery-src={img.src}>
+            <Image 
+              src={img} 
+              alt={`Gallery image ${i + 1}`} 
+              class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+              loading={i < 4 ? "eager" : "lazy"}
+              fetchpriority={i < 4 ? "high" : "auto"}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-500">
+                <span class="material-symbols-rounded">zoom_in</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {imageAssets.length === 0 && (
+        <div class="text-center py-20">
+          <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center mb-6">
+            <span class="material-symbols-rounded text-4xl text-gray-400">photo_library</span>
+          </div>
+          <h3 class="text-2xl font-bold text-dark mb-2">No Images Found</h3>
+          <p class="text-gray-500">Check back later for exciting photos!</p>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <!-- ═══════════ LIGHTBOX ═══════════ -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-dark/95 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8">
+    <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10" aria-label="Close lightbox">
+      <span class="material-symbols-rounded">close</span>
+    </button>
+    <div class="relative max-w-5xl w-full max-h-full flex items-center justify-center">
+      <img id="lightbox-img" src="" alt="Expanded gallery view" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl scale-95 transition-transform duration-300" />
+    </div>
+  </div>
+</MainLayout>
+
+<script is:inline>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+
+  function openLightbox(src) {
+    if (lightbox && lightboxImg) {
+      lightboxImg.src = src;
+      lightbox.classList.remove('opacity-0', 'pointer-events-none');
+      lightbox.classList.add('opacity-100', 'pointer-events-auto');
+      setTimeout(() => {
+        lightboxImg.classList.remove('scale-95');
+        lightboxImg.classList.add('scale-100');
+      }, 50);
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeLightbox() {
+    if (lightbox && lightboxImg) {
+      lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+      lightbox.classList.add('opacity-0', 'pointer-events-none');
+      lightboxImg.classList.remove('scale-100');
+      lightboxImg.classList.add('scale-95');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        lightboxImg.src = '';
+      }, 300);
+    }
+  }
+
+  // Use event delegation with data attributes instead of inline onclick
+  document.querySelectorAll('[data-gallery-src]').forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.getAttribute('data-gallery-src');
+      if (src) openLightbox(src);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>

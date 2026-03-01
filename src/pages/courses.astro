@@ -1,0 +1,147 @@
+---
+import '../styles/global.css';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const courses = [
+  { name: 'Web Development', icon: 'code', desc: 'HTML, CSS, JavaScript, React, Node.js', dur: '6 Months', level: 'Beginner–Advanced', category: 'programming', color: 'red' },
+  { name: 'Python Programming', icon: 'terminal', desc: 'Core Python, OOP, Django, Flask', dur: '5 Months', level: 'Beginner–Advanced', category: 'programming', color: 'navy' },
+  { name: 'Data Science & AI', icon: 'psychology', desc: 'Pandas, ML, Deep Learning, TensorFlow', dur: '8 Months', level: 'Intermediate', category: 'data', color: 'red' },
+  { name: 'Java Programming', icon: 'coffee', desc: 'Core Java, Spring Boot, Microservices', dur: '6 Months', level: 'Beginner–Advanced', category: 'programming', color: 'navy' },
+  { name: 'Graphic Design', icon: 'palette', desc: 'Photoshop, Illustrator, InDesign, Figma', dur: '4 Months', level: 'Beginner', category: 'design', color: 'red' },
+  { name: 'UI/UX Design', icon: 'draw', desc: 'User Research, Wireframing, Prototyping', dur: '5 Months', level: 'Intermediate', category: 'design', color: 'navy' },
+  { name: 'Video Editing', icon: 'movie', desc: 'Premiere Pro, After Effects, DaVinci', dur: '3 Months', level: 'Beginner', category: 'design', color: 'red' },
+  { name: 'MS Office Mastery', icon: 'description', desc: 'Excel, Word, PPT, Access, VBA Macros', dur: '3 Months', level: 'Beginner', category: 'office', color: 'navy' },
+  { name: 'Tally & Accounting', icon: 'calculate', desc: 'Tally Prime, GST, Accounting Basics', dur: '3 Months', level: 'Beginner', category: 'office', color: 'red' },
+  { name: 'Digital Marketing', icon: 'campaign', desc: 'SEO, Social Media, Google Ads, Analytics', dur: '4 Months', level: 'Beginner–Advanced', category: 'marketing', color: 'navy' },
+  { name: 'Content Marketing', icon: 'edit_note', desc: 'Blog Writing, Copywriting, Email Funnels', dur: '2 Months', level: 'Beginner', category: 'marketing', color: 'red' },
+  { name: 'Cybersecurity', icon: 'security', desc: 'Ethical Hacking, Pen Testing, SIEM', dur: '6 Months', level: 'Advanced', category: 'security', color: 'navy' },
+  { name: 'Cloud Computing', icon: 'cloud', desc: 'AWS, Azure, Docker, Kubernetes', dur: '5 Months', level: 'Intermediate', category: 'programming', color: 'red' },
+  { name: 'Mobile App Dev', icon: 'phone_android', desc: 'React Native, Flutter, iOS & Android', dur: '6 Months', level: 'Intermediate', category: 'web', color: 'navy' },
+  { name: 'WordPress & CMS', icon: 'language', desc: 'WordPress, Shopify, WooCommerce', dur: '2 Months', level: 'Beginner', category: 'web', color: 'red' },
+  { name: 'Database Management', icon: 'storage', desc: 'MySQL, MongoDB, PostgreSQL, Redis', dur: '4 Months', level: 'Intermediate', category: 'data', color: 'navy' },
+];
+
+const categories = [
+  { key: 'all', label: 'All Courses' },
+  { key: 'programming', label: 'Programming' },
+  { key: 'design', label: 'Design' },
+  { key: 'office', label: 'Office' },
+  { key: 'web', label: 'Web' },
+  { key: 'data', label: 'Data' },
+  { key: 'marketing', label: 'Marketing' },
+  { key: 'security', label: 'Security' },
+];
+---
+
+<MainLayout title="Courses | Vista Educare" activePage="courses">
+  <!-- Hero -->
+  <section class="relative pt-40 pb-32 lg:pt-48 lg:pb-52 overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+      <img src="/images/slider-2.jpg" alt="Vista Educare Classes" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-darker/95 via-navy-dark/90 to-dark/80"></div>
+    </div>
+    
+    <!-- Animated Orbs -->
+    <div class="absolute inset-0 pointer-events-none mix-blend-screen">
+      <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-red/20 rounded-full blur-[120px] animate-orb"></div>
+      <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-indigo/20 rounded-full blur-[120px] animate-orb-reverse"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" style="animation: fade-up 0.8s ease forwards;">
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/90 text-sm font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-red animate-pulse"></span>Our Programs
+      </span>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white mb-6 drop-shadow-2xl" style="font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem);">
+        Our <span class="text-red">Courses</span>
+      </h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+        100+ industry-relevant courses designed to launch and accelerate your tech career.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category Tabs -->
+  <section class="sticky top-20 z-30 bg-white/80 backdrop-blur-2xl border-b border-gray-100 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3 py-4 overflow-x-auto scrollbar-hide" id="categoryTabs">
+        {categories.map((cat) => (
+          <button class={`px-6 py-3 rounded-2xl text-sm font-bold whitespace-nowrap transition-all duration-300 category-tab ${cat.key === 'all' ? 'bg-navy text-white shadow-lg shadow-navy/20 scale-105' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-dark border-transparent'}`} data-category={cat.key}>
+            {cat.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Grid -->
+  <section class="py-16 bg-light mesh-gradient">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="courses-grid">
+        {courses.map((course, i) => (
+          <div class={`card-premium reveal course-card rounded-3xl overflow-hidden bg-white group border border-gray-100 hover:border-transparent transition-all duration-300 shadow-sm hover:shadow-2xl`} data-category={course.category} style={`transition-delay: ${Math.min(i * 0.04, 0.3)}s;`}>
+            <div class={`h-1.5 bg-gradient-to-r ${course.color === 'red' ? 'from-red to-red-dark' : 'from-navy to-indigo'}`}></div>
+            <div class="p-8">
+              <div class={`w-14 h-14 rounded-2xl ${course.color === 'red' ? 'bg-red-50 text-red shadow-red/20' : 'bg-indigo-50 text-navy shadow-navy/20'} flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500`}>
+                <span class="material-symbols-rounded text-3xl">{course.icon}</span>
+              </div>
+              <h3 class="text-xl font-extrabold text-dark mb-3 drop-shadow-sm">{course.name}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed font-medium mb-6 line-clamp-2">{course.desc}</p>
+              
+              <div class="flex items-center justify-between text-xs font-bold text-gray-500 pt-4 border-t border-gray-100 group-hover:text-dark transition-colors">
+                <span class="flex items-center gap-1.5"><span class="material-symbols-rounded text-base text-gray-400 group-hover:text-navy transition-colors">schedule</span>{course.dur}</span>
+                <span class="flex items-center gap-1.5"><span class="material-symbols-rounded text-base text-gray-400 group-hover:text-red transition-colors">signal_cellular_alt</span>{course.level}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 relative overflow-hidden">
+    <!-- Premium Purple/Navy gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-navy via-[#3e3458] to-[#5a3668]"></div>
+     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+         <div class="absolute transform rotate-45 right-[-10%] top-[10%] w-96 h-96 bg-white/10"></div>
+         <div class="absolute transform -rotate-12 left-[-10%] bottom-[-10%] w-[500px] h-32 bg-white/5"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 drop-shadow-xl">Can't Decide? <span class="gradient-text-light">We'll Help</span></h2>
+      <p class="text-white/80 text-lg font-medium max-w-xl mx-auto mb-10">Talk to our career counselor for a personalized course recommendation based on your goals.</p>
+      <a href="/contact" class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-navy font-bold rounded-2xl text-xl shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all">
+        Get Free Counseling <span class="material-symbols-rounded">arrow_forward</span>
+      </a>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  // Category filtering
+  const tabs = document.querySelectorAll('.category-tab');
+  const cards = document.querySelectorAll('.course-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const cat = tab.getAttribute('data-category');
+
+      tabs.forEach(t => {
+        t.classList.remove('bg-navy', 'text-white', 'shadow-lg', 'shadow-navy/20', 'scale-105');
+        t.classList.add('bg-gray-50', 'text-gray-500');
+      });
+      tab.classList.remove('bg-gray-50', 'text-gray-500');
+      tab.classList.add('bg-navy', 'text-white', 'shadow-lg', 'shadow-navy/20', 'scale-105');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (cat === 'all' || cardCat === cat) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

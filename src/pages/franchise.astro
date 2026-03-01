@@ -1,0 +1,160 @@
+---
+import '../styles/global.css';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const benefits = [
+  { icon: 'trending_up', title: 'High ROI', desc: 'Proven business model with 95% success rate and 8-month breakeven period.', color: 'red' },
+  { icon: 'verified', title: 'Brand Power', desc: 'Leverage the trusted Vista Educare brand and its 15+ years of reputation.', color: 'navy' },
+  { icon: 'school', title: 'Full Training', desc: 'Comprehensive training on operations, marketing, and curriculum delivery.', color: 'red' },
+  { icon: 'campaign', title: 'Marketing Support', desc: 'Digital marketing, social media, and local campaigns from head office.', color: 'navy' },
+  { icon: 'support_agent', title: '24/7 Support', desc: 'Dedicated support team for technical, operational and academic issues.', color: 'red' },
+  { icon: 'devices', title: 'Tech Platform', desc: 'Access to Vista Educare\'s LMS, student portal, and management software.', color: 'navy' },
+];
+---
+
+<MainLayout title="Own a Franchise | Vista Educare" activePage="franchise">
+  <!-- Hero -->
+  <section class="relative pt-40 pb-32 lg:pt-48 lg:pb-52 overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+      <img src="/images/slider-1.jpg" alt="Vista Educare Students" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-darker/95 via-navy-dark/90 to-dark/80"></div>
+    </div>
+    
+    <!-- Animated Orbs -->
+    <div class="absolute inset-0 pointer-events-none mix-blend-screen">
+      <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-red/20 rounded-full blur-[120px] animate-orb"></div>
+      <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-indigo/20 rounded-full blur-[120px] animate-orb-reverse"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" style="animation: fade-up 0.8s ease forwards;">
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-white/90 text-sm font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-red animate-pulse"></span>Franchise Opportunity
+      </span>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white mb-6 drop-shadow-2xl" style="font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem);">
+        Own a <span class="text-red">Vista</span> <span class="text-indigo-light">Educare</span>
+      </h1>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+        Start your own education center with Northeast India's fastest-growing computer education brand.
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 bg-white relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 -mt-28 relative z-10">
+        {[
+          { val: '3', suf: 'L', label: 'Min. Investment' },
+          { val: '50', suf: '+', label: 'Active Centers' },
+          { val: '8', suf: ' Months', label: 'Breakeven' },
+          { val: '95', suf: '%', label: 'Success Rate' },
+        ].map((s, i) => (
+          <div class="card-premium reveal bg-white rounded-2xl p-6 text-center shadow-xl" style={`transition-delay:${i*0.1}s`}>
+            <div class="text-3xl font-black gradient-text counter" data-target={s.val} data-suffix={s.suf}>0</div>
+            <div class="text-gray-500 text-xs mt-2 font-semibold uppercase tracking-wider">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-20 bg-light mesh-gradient">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red/[0.06] text-red text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-red"></span>Why Partner With Us
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-black text-dark">Franchise <span class="text-navy">Benefits</span></h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {benefits.map((b, i) => (
+          <div class="card-premium reveal p-8 rounded-3xl group" style={`transition-delay: ${i * 0.08}s`}>
+            <div class={`w-14 h-14 rounded-2xl bg-gradient-to-br ${b.color === 'red' ? 'from-red to-red-dark shadow-red/25' : 'from-navy to-navy-dark shadow-navy/25'} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
+              <span class="material-symbols-rounded text-white text-2xl">{b.icon}</span>
+            </div>
+            <h3 class="text-xl font-extrabold text-dark mb-3 drop-shadow-sm">{b.title}</h3>
+            <p class="text-gray-600 text-base leading-relaxed font-medium">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy/[0.06] text-navy text-xs font-bold uppercase tracking-[0.2em] mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-navy"></span>Process
+        </span>
+        <h2 class="text-4xl sm:text-5xl font-black text-dark">How It <span class="text-red">Works</span></h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {[
+          { step: '01', title: 'Apply', desc: 'Fill out the franchise enquiry form with your details and investment capacity.', icon: 'edit_note' },
+          { step: '02', title: 'Connect', desc: 'Our team will schedule a meeting to discuss the opportunity in detail.', icon: 'handshake' },
+          { step: '03', title: 'Setup', desc: 'We help you set up infrastructure, train your team, and configure systems.', icon: 'build' },
+          { step: '04', title: 'Launch', desc: 'Open your center with our full marketing and operational support.', icon: 'rocket_launch' },
+        ].map((s, i) => (
+          <div class="reveal text-center" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-navy to-indigo flex items-center justify-center mb-5 shadow-lg shadow-navy/20">
+              <span class="material-symbols-rounded text-white text-2xl">{s.icon}</span>
+            </div>
+            <div class="text-xs font-black text-red mb-2 tracking-widest">{s.step}</div>
+            <h3 class="text-xl font-extrabold text-dark mb-3 lg:mt-4 drop-shadow-sm">{s.title}</h3>
+            <p class="text-gray-600 text-base font-medium">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form -->
+  <section class="py-24 relative overflow-hidden">
+    <!-- Premium Purple/Navy gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-navy via-[#3e3458] to-[#5a3668]"></div>
+     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+         <div class="absolute transform rotate-45 right-[-10%] top-[10%] w-96 h-96 bg-white/10"></div>
+         <div class="absolute transform rotate-12 left-[-10%] bottom-[-10%] w-[500px] h-32 bg-white/5"></div>
+    </div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 drop-shadow-xl">Start Your <span class="gradient-text-light">Journey</span></h2>
+        <p class="text-white/80 text-lg font-medium max-w-xl mx-auto">Fill in your details and our team will get back to you within 24 hours to discuss your future.</p>
+      </div>
+      <form class="glass-light backdrop-blur-3xl rounded-3xl p-8 sm:p-12 space-y-6 reveal shadow-2xl border-white/20">
+        <div class="grid sm:grid-cols-2 gap-6">
+          <input type="text" placeholder="Full Name" class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-dark placeholder-gray-500 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all" required />
+          <input type="tel" placeholder="Phone Number" class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-dark placeholder-gray-500 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all" required />
+        </div>
+        <input type="email" placeholder="Email Address" class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-dark placeholder-gray-500 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all" required />
+        <input type="text" placeholder="City / Location" class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-dark placeholder-gray-500 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all" required />
+        <select class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-gray-700 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all appearance-none cursor-pointer">
+          <option value="" disabled selected>Investment Capacity</option>
+          <option value="3-5">₹3L – ₹5L</option>
+          <option value="5-10">₹5L – ₹10L</option>
+          <option value="10+">₹10L+</option>
+        </select>
+        <textarea placeholder="Your Message (Optional)" rows="4" class="w-full px-5 py-4 bg-dark/5 border border-dark/10 rounded-xl text-dark placeholder-gray-500 text-base font-medium focus:border-navy focus:bg-white focus:ring-4 focus:ring-navy/10 focus:outline-none transition-all resize-none"></textarea>
+        <button type="submit" class="w-full py-5 btn-navy font-bold rounded-xl text-xl shadow-lg hover:-translate-y-1 transition-transform cursor-pointer">Submit Enquiry</button>
+        <div id="franchise-success" class="hidden text-center py-4 px-6 bg-green-50 border border-green-200 rounded-xl text-green-700 font-semibold text-sm">Thank you for your interest! Our franchise team will contact you within 24 hours.</div>
+      </form>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const franchiseForm = document.querySelector('form.glass-light') || document.querySelector('form');
+  const franchiseSuccess = document.getElementById('franchise-success');
+  franchiseForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    franchiseForm.classList.add('hidden');
+    franchiseSuccess?.classList.remove('hidden');
+  });
+</script>

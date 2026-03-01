@@ -1,0 +1,117 @@
+---
+const currentPage = Astro.props.activePage || '';
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white/95 backdrop-blur-md border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo -->
+      <a href="/" class="logo-container flex items-center gap-2 sm:gap-2.5 group rounded-xl px-3 py-1.5 sm:px-4 sm:py-2 transition-all duration-300 border border-transparent dark:border-gray-100 dark:shadow-sm">
+        <img src="/images/logo_ve.png" alt="VE Logo" width="48" height="48" class="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105 flex-shrink-0" />
+        <img src="/images/logo_name.png" alt="Vista Educare" class="h-5 sm:h-8 w-auto transition-transform duration-300 group-hover:scale-105 flex-shrink-0" />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-1">
+        <a href="/" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'home' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>Home</a>
+        <a href="/about" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'about' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>About</a>
+        <a href="/courses" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'courses' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>Courses</a>
+        <a href="/gallery" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'gallery' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>Gallery</a>
+        <a href="/franchise" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'franchise' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>Franchise</a>
+        <a href="/contact" class={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${currentPage === 'contact' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:text-navy hover:bg-gray-50'}`}>Contact</a>
+      </div>
+
+      <!-- CTA + Mobile -->
+      <div class="flex items-center gap-3">
+        <a href="/contact" class="hidden md:inline-flex px-6 py-2.5 bg-red text-white font-bold text-sm rounded-xl btn-red">Enroll Now</a>
+        <!-- Dark mode toggle -->
+        <button id="dark-toggle" class="w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-all cursor-pointer" aria-label="Toggle dark mode">
+          <span class="material-symbols-rounded text-xl dark-toggle-sun">light_mode</span>
+          <span class="material-symbols-rounded text-xl dark-toggle-moon">dark_mode</span>
+        </button>
+        <!-- Hamburger -->
+        <button id="mobile-toggle" class="md:hidden flex flex-col gap-1.5 w-8 h-8 items-center justify-center" aria-label="Menu">
+          <span class="block w-5 h-0.5 bg-navy transition-all duration-300 origin-center" id="bar1"></span>
+          <span class="block w-5 h-0.5 bg-navy transition-all duration-300" id="bar2"></span>
+          <span class="block w-5 h-0.5 bg-navy transition-all duration-300 origin-center" id="bar3"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden bg-white/98 backdrop-blur-xl border-t border-gray-100 shadow-xl overflow-hidden transition-all duration-400 ease-in-out" style="max-height: 0; opacity: 0;">
+    <div class="px-4 py-6 flex flex-col gap-2">
+      <a href="/" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'home' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>Home</a>
+      <a href="/about" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'about' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>About</a>
+      <a href="/courses" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'courses' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>Courses</a>
+      <a href="/gallery" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'gallery' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>Gallery</a>
+      <a href="/franchise" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'franchise' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>Franchise</a>
+      <a href="/contact" class={`px-4 py-3 rounded-xl font-semibold transition-all ${currentPage === 'contact' ? 'bg-indigo/10 text-navy' : 'text-gray-600 hover:bg-gray-50 hover:text-navy'}`}>Contact</a>
+      <a href="/contact" class="mt-3 px-6 py-3 bg-red text-white font-bold rounded-xl text-center btn-red">Enroll Now</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar?.classList.add('bg-white', 'shadow-md');
+      navbar?.classList.remove('bg-white/95');
+    } else {
+      navbar?.classList.add('bg-white/95');
+      navbar?.classList.remove('bg-white', 'shadow-md');
+    }
+  });
+
+  // Mobile toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+
+  let menuOpen = false;
+
+  function closeMenu() {
+    if (!menuOpen) return;
+    menuOpen = false;
+    if (menu) {
+      menu.style.maxHeight = '0';
+      menu.style.opacity = '0';
+    }
+    bar1!.style.transform = '';
+    bar2!.style.opacity = '';
+    bar3!.style.transform = '';
+  }
+
+  function openMenu() {
+    menuOpen = true;
+    if (menu) {
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+      menu.style.opacity = '1';
+    }
+    bar1!.style.transform = 'translateY(8px) rotate(45deg)';
+    bar2!.style.opacity = '0';
+    bar3!.style.transform = 'translateY(-8px) rotate(-45deg)';
+  }
+
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuOpen ? closeMenu() : openMenu();
+  });
+
+  // Close menu when tapping outside the navbar
+  document.addEventListener('click', (e) => {
+    if (menuOpen && navbar && !navbar.contains(e.target as Node)) {
+      closeMenu();
+    }
+  });
+
+  // Close menu when a nav link is clicked
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => closeMenu());
+  });
+</script>

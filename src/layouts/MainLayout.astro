@@ -1,0 +1,254 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  activePage?: string;
+}
+
+const { title, description = 'Vista Educare - Empowering futures through quality computer education. Certified courses, expert faculty, and placement support.', activePage = 'home' } = Astro.props;
+const ogImage = '/images/logo_name.png';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="computer education, VE education, computer courses, franchise, IT training, programming, web development" />
+  <title>{title}</title>
+  <link rel="icon" type="image/png" href="/images/logo_ve.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content="Vista Educare" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0&display=swap" rel="stylesheet" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#312E81" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Vista Educare",
+    "url": "https://vistaeducare.com",
+    "logo": "https://vistaeducare.com/images/logo_ve.png",
+    "description": "Empowering futures through quality computer education since 2014.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "GMC Ward No. 44, Shree Krishna Market, GS Rd, Ganeshguri",
+      "addressLocality": "Guwahati",
+      "addressRegion": "Assam",
+      "postalCode": "781006",
+      "addressCountry": "IN"
+    },
+    "telephone": ["+917637001444", "+917637001555"],
+    "email": "vistaeducare@gmail.com",
+    "foundingDate": "2014",
+    "founder": { "@type": "Person", "name": "Titon Das" }
+  })} />
+
+  <style is:global>
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+  <!-- Dark mode init (must run before body renders to prevent flash) -->
+  <script is:inline>
+    (function() {
+      const stored = localStorage.getItem('ve-dark-mode');
+      if (stored === 'true') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <!-- PWA Service Worker Registration -->
+  <script is:inline>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</head>
+<body class="bg-light min-h-screen flex flex-col">
+  <Navbar activePage={activePage} />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer />
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full bg-navy text-white shadow-xl shadow-navy/25 flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-300 hover:bg-navy-light hover:scale-110 cursor-pointer" aria-label="Back to top">
+    <span class="material-symbols-rounded text-xl">keyboard_arrow_up</span>
+  </button>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/917637001444?text=Hi%2C%20I%27m%20interested%20in%20Vista%20Educare%20courses" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-xl shadow-green-500/30 flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 group" aria-label="Chat on WhatsApp">
+    <svg class="w-7 h-7 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Custom PWA Install Banner -->
+  <div id="pwa-install-banner" class="fixed top-20 sm:top-24 left-1/2 -translate-x-1/2 z-[60] w-[90%] max-w-sm bg-white/95 backdrop-blur-xl border border-gray-200 shadow-2xl rounded-2xl p-4 flex items-center justify-between gap-4 scale-95 opacity-0 pointer-events-none transition-all duration-500 ease-out translate-y-[-20px]">
+    <div class="flex items-center gap-3">
+      <img src="/images/logo_ve.png" alt="Vista Educare Icon" class="w-10 h-10 object-contain drop-shadow-sm" />
+      <div>
+        <h4 class="font-bold text-dark text-sm leading-tight">Install Vista Educare</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Fast, offline ready & easy access.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="pwa-install-btn" class="px-4 py-2 bg-navy text-white text-xs font-bold rounded-xl hover:bg-navy-light transition-colors shadow-lg">Install</button>
+      <button id="pwa-dismiss-btn" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Dismiss">
+        <span class="material-symbols-rounded text-lg">close</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Counter animation (replays when re-entering viewport)
+    function animateCounter(el: Element) {
+      const target = parseInt(el.getAttribute('data-target') || '0');
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 2000;
+      const start = performance.now();
+      
+      function update(now: number) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * target);
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!entry.target.classList.contains('counted')) {
+              entry.target.classList.add('counted');
+              animateCounter(entry.target);
+            }
+          } else {
+            // Allow replay when element leaves viewport
+            entry.target.classList.remove('counted');
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll('.counter').forEach((el) => counterObserver.observe(el));
+
+    // Back to Top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTop?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTop?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else {
+        backToTop?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTop?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    });
+    backToTop?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ─── Dark Mode Toggle ───
+    const darkToggle = document.getElementById('dark-toggle');
+    darkToggle?.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('ve-dark-mode', String(isDark));
+    });
+
+    // ─── PWA Persistent Install Prompt ───
+    let deferredPrompt: any = null;
+    const pwaBanner = document.getElementById('pwa-install-banner');
+    const installBtn = document.getElementById('pwa-install-btn');
+    const dismissBtn = document.getElementById('pwa-dismiss-btn');
+
+    function showBanner() {
+      if (pwaBanner) {
+        // Render the banner animated
+        pwaBanner.classList.remove('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-[-20px]');
+        pwaBanner.classList.add('opacity-100', 'pointer-events-auto', 'scale-100', 'translate-y-0');
+      }
+    }
+
+    function hideBanner() {
+      if (pwaBanner) {
+        pwaBanner.classList.add('opacity-0', 'pointer-events-none', 'scale-95', 'translate-y-[-20px]');
+        pwaBanner.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100', 'translate-y-0');
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent browser's default mini-infobar from appearing on mobile naturally
+      e.preventDefault();
+      // Stash the event so it can be triggered later
+      deferredPrompt = e;
+      
+      // Always show the banner 1.5 seconds after load, ignoring previous dismissals
+      setTimeout(showBanner, 1500);
+    });
+
+    installBtn?.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        // Show the actual browser install prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond
+        await deferredPrompt.userChoice;
+        
+        // Hide our custom banner regardless of outcome immediately
+        hideBanner();
+        // Clear the prompt
+        deferredPrompt = null;
+      }
+    });
+
+    dismissBtn?.addEventListener('click', () => {
+      hideBanner();
+      // Notice: We are NOT saving the dismissal to localStorage
+      // as the user requested the prompt to show EVERY time they visit.
+    });
+  </script>
+</body>
+</html>
+

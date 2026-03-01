@@ -1,0 +1,21 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/global.css';
+---
+
+<MainLayout title="Offline | Vista Educare" activePage="">
+  <section class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 pt-20">
+    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6 text-gray-400">
+      <span class="material-symbols-rounded text-5xl">wifi_off</span>
+    </div>
+    
+    <h1 class="text-4xl sm:text-5xl font-black text-dark mb-4">You are <span class="text-red">Offline</span></h1>
+    <p class="text-gray-500 max-w-md mx-auto text-lg mb-8 leading-relaxed">
+      It seems you have lost your internet connection. Please check your network and try again.
+    </p>
+    
+    <button onclick="window.location.reload()" class="px-8 py-4 bg-navy text-white font-bold rounded-2xl hover:bg-navy-light transition-all shadow-lg inline-flex items-center gap-2">
+      <span class="material-symbols-rounded">refresh</span> Try Again
+    </button>
+  </section>
+</MainLayout>
