@@ -1,0 +1,228 @@
+---
+import '../../styles/global.css';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const curriculum = [
+  { module: "Module 1: Basics of Accounting", topics: ["Introduction to Accounting Principles", "Journal Entries & Ledgers", "Trial Balance & Financial Statements", "Banking Transactions"] },
+  { module: "Module 2: Tally Prime Fundamentals", topics: ["Company Creation & Configuration", "Chart of Accounts setup", "Voucher Entry (Receipt, Payment, Contra, Journal)", "Day Book & Registers"] },
+  { module: "Module 3: Inventory Management", topics: ["Stock Groups & Items", "Units of Measure", "Purchase & Sales Order Processing", "Inventory Valuation & Godown Management"] },
+  { module: "Module 4: Advanced Accounting", topics: ["Cost Centres & Cost Categories", "Budget & Scenario Management", "Bank Reconciliation Statement (BRS)", "Multi-Currency Accounting"] },
+  { module: "Module 5: GST & Taxation", topics: ["GST Concepts & Implementation", "Intra-state & Inter-state transactions", "Generating E-Way Bills & E-Invoicing", "GSTR-1, GSTR-2, GSTR-3B preparation", "TDS & TCS fundamentals"] },
+  { module: "Module 6: Payroll & Reporting", topics: ["Employee Groups & Categorization", "Attendance & Production Types", "Pay Heads (Earnings, Deductions, Statutory)", "Generating Payslips & MIS Reports"] }
+];
+
+const features = [
+  { icon: 'verified', title: '100% Practical Training', desc: 'Learn on live data with real-world scenarios.' },
+  { icon: 'work_history', title: 'Placement Assistance', desc: 'Get interview preparation and job assistance.' },
+  { icon: 'school', title: 'Expert Faculty', desc: 'Learn from experienced accounting professionals.' },
+  { icon: 'library_books', title: 'Study Material', desc: 'Comprehensive notes and practice assignments provided.' }
+];
+
+const stats = [
+  { val: '3', suf: ' Months', label: 'Duration' },
+  { val: '6', suf: '+ Modules', label: 'Curriculum' },
+  { val: 'Beginner', suf: '', label: 'Level' },
+  { val: '100', suf: '%', label: 'Practical' },
+];
+---
+
+<MainLayout title="Tally & Accounting Course | Vista Educare" activePage="courses">
+  <!-- ═══════════ HERO SECTION ═══════════ -->
+  <section class="relative pt-40 pb-32 lg:pt-48 lg:pb-40 overflow-hidden bg-navy-darker">
+    <!-- Abstract Background -->
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-[url('/images/noise.png')] opacity-5 mix-blend-overlay"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-navy-darker via-navy-dark to-[#1a1c3d]"></div>
+      
+      <!-- Animated Orbs -->
+      <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-red/15 rounded-full blur-[120px] animate-orb mix-blend-screen pointer-events-none"></div>
+      <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo/15 rounded-full blur-[100px] animate-orb-reverse mix-blend-screen pointer-events-none"></div>
+      
+      <!-- Grid Pattern -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="flex flex-col lg:flex-row gap-12 lg:items-center">
+        <!-- Text Content -->
+        <div class="lg:w-3/5" style="animation: fade-up 0.8s ease forwards;">
+          <a href="/courses" class="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 group text-sm font-medium">
+            <span class="material-symbols-rounded text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span> Back to Courses
+          </a>
+          
+          <div class="flex flex-wrap gap-3 mb-6">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-red/10 border border-red/20 text-red-light text-xs font-bold uppercase tracking-wider">
+              <span class="material-symbols-rounded text-sm">calculate</span> Accounting
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wider">
+              <span class="material-symbols-rounded text-sm">trending_up</span> High Demand
+            </span>
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 drop-shadow-2xl">
+            Certified <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-light to-red">Tally Prime & GST</span> Professional
+          </h1>
+          
+          <p class="text-lg text-white/70 mb-10 leading-relaxed max-w-xl">
+            Master the most widely used accounting software in India. Learn manual accounting, computerized inventory, advanced GST implementation, and payroll management with 100% practical training.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="/contact" class="px-8 py-4 btn-red font-bold rounded-2xl text-lg inline-flex items-center justify-center gap-2 shadow-lg shadow-red/25 hover:-translate-y-1 transition-transform w-full sm:w-auto">
+              Enroll Now <span class="material-symbols-rounded">app_registration</span>
+            </a>
+            <a href="#curriculum" class="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/10 text-white font-semibold rounded-2xl hover:bg-white/10 transition-all text-lg flex items-center justify-center w-full sm:w-auto">
+              View Syllabus
+            </a>
+          </div>
+        </div>
+        
+        <!-- Hero Right Data Card -->
+        <div class="lg:w-2/5 reveal" style="transition-delay: 0.2s">
+          <div class="glass backdrop-blur-2xl border border-white/10 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+              <span class="material-symbols-rounded text-[120px] text-white">account_balance_wallet</span>
+            </div>
+            
+            <h3 class="text-white text-xl font-bold mb-6 flex items-center gap-2">
+              <span class="w-1.5 h-6 rounded-full bg-red"></span> Course Highlights
+            </h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+              {stats.map(s => (
+                <div class="bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors">
+                  <div class="text-gray-400 text-xs font-medium uppercase tracking-wider mb-1">{s.label}</div>
+                  <div class="text-2xl font-black text-white">{s.val}<span class="text-lg font-bold text-red-light">{s.suf}</span></div>
+                </div>
+              ))}
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-white/10 text-sm text-gray-300 flex items-start gap-3">
+              <span class="material-symbols-rounded text-green-400 flex-shrink-0">verified</span>
+              <p>Includes complete preparation for actual industry work environments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FEATURES ═══════════ -->
+  <section class="py-16 bg-white relative -mt-10 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((f, i) => (
+          <div class="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50 reveal hover:-translate-y-2 transition-transform duration-300" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center mb-4 text-navy">
+              <span class="material-symbols-rounded">{f.icon}</span>
+            </div>
+            <h3 class="text-lg font-bold text-dark mb-2">{f.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ OVERVIEW & WHY LEARN ═══════════ -->
+  <section class="py-20 bg-light mesh-gradient">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-navy/[0.06] text-navy text-xs font-bold uppercase tracking-[0.2em] mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-navy"></span>Course Overview
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-dark mb-6 leading-tight">Why Learn <span class="text-red">Tally Prime & GST?</span></h2>
+          
+          <div class="space-y-6 text-gray-600 leading-relaxed font-medium">
+            <p>Tally Prime is India's leading business management software for accounting, inventory, and payroll. With the implementation of GST, the demand for certified Tally professionals who understand modern taxation has skyrocketed.</p>
+            <p>Our comprehensive course is designed to take you from basic accounting principles to advanced computerized accounting. You won't just learn the software; you'll understand the core accounting logic behind every transaction.</p>
+          </div>
+          
+          <div class="mt-8 flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 flex-shrink-0"><span class="material-symbols-rounded text-sm">check</span></div>
+              <span class="text-dark font-semibold text-sm">Suitable for Commerce & Non-Commerce students</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 flex-shrink-0"><span class="material-symbols-rounded text-sm">check</span></div>
+              <span class="text-dark font-semibold text-sm">Opens career doors as Accountant, Audit Executive, or Financial Analyst</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 flex-shrink-0"><span class="material-symbols-rounded text-sm">check</span></div>
+              <span class="text-dark font-semibold text-sm">Essential skill for business owners & entrepreneurs</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative reveal" style="transition-delay: 0.2s">
+          <div class="rounded-3xl overflow-hidden shadow-2xl shadow-navy/10 relative">
+            <img src="/images/home-about.webp" alt="Students learning computer" class="w-full h-[500px] object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-6 left-6 right-6 glass p-6 rounded-2xl border border-white/20">
+              <h4 class="text-white font-bold text-lg mb-2">Who is this for?</h4>
+              <p class="text-white/80 text-sm">Fresh graduates, job seekers, junior accountants, and SME business owners looking to manage their finances efficiently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SYLLABUS ═══════════ -->
+  <section id="curriculum" class="py-24 bg-white relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-4xl sm:text-5xl font-black text-dark mb-4 drop-shadow-sm">Course <span class="text-navy">Syllabus</span></h2>
+        <p class="text-gray-500 text-lg">Detailed, step-by-step curriculum designed by industry experts.</p>
+      </div>
+
+      <div class="space-y-6">
+        {curriculum.map((item, index) => (
+          <div class="card-premium reveal rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start border border-gray-100" style={`transition-delay: ${index * 0.05}s`}>
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red/10 to-red/5 flex items-center justify-center flex-shrink-0 shadow-inner">
+              <span class="text-2xl font-black text-red">{index + 1}</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-extrabold text-dark mb-4 pb-4 border-b border-gray-100">{item.module}</h3>
+              <ul class="grid sm:grid-cols-2 gap-3">
+                {item.topics.map(topic => (
+                  <li class="flex items-start gap-2 text-gray-600 text-sm font-medium">
+                    <span class="material-symbols-rounded text-navy mt-0.5 text-[18px]">play_arrow</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="py-24 relative overflow-hidden bg-navy-darker">
+    <div class="absolute inset-0 bg-[url('/images/noise.png')] opacity-5 mix-blend-overlay"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-navy-darker via-navy-dark to-[#1a1c3d]"></div>
+    
+    <div class="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-red/20 rounded-full blur-[120px] animate-orb mix-blend-screen pointer-events-none"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 reveal">
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight drop-shadow-xl">
+        Ready to master Tally?
+      </h2>
+      <p class="text-white/60 text-lg max-w-2xl mx-auto mb-10">
+        Join our next batch and take the first step towards a rewarding career in accounting and finance.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="px-10 py-4 bg-red text-white font-bold rounded-2xl hover:bg-red-light transition-all text-lg shadow-xl shadow-red/25 inline-flex items-center justify-center gap-2">
+          Apply for Admission <span class="material-symbols-rounded">arrow_forward</span>
+        </a>
+        <a href="tel:+917637001444" class="px-10 py-4 bg-white/[0.05] border border-white/10 text-white font-semibold rounded-2xl hover:bg-white/10 transition-all text-lg flex items-center justify-center gap-2">
+          <span class="material-symbols-rounded text-xl">call</span> Call +91 76370 01444
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
