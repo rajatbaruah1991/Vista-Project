@@ -58,7 +58,45 @@ const courses = await response.json();
 ```
 *Note the expected object properties (`title`, `duration`, `eligibility`, `icon`, `color`, `category`) that the UI needs to render the cards.*
 
-### 2. Dynamic Gallery (`src/pages/gallery.astro`)
+### 2. Dynamic Course Detail Pages (`src/pages/course/[slug].astro`)
+
+Instead of creating a new file for every single course (like `tally.astro`), you should use Astro's **Dynamic Routing**.
+1. Rename `src/pages/course/tally.astro` to `src/pages/course/[slug].astro`. It will act as a master template.
+2. If using **Static Site Generation (SSG)**, you MUST export a `getStaticPaths` function at the top of the file to tell Astro which URLs to build based on your PHP database:
+
+```javascript
+// src/pages/course/[slug].astro
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  // Fetch all available course slugs from PHP backend
+  const res = await fetch('https://your-php-backend.com/api/courses');
+  const courses = await res.json();
+  
+  // Return the paths so Astro can build them
+  return courses.map((course) => {
+    return {
+      params: { slug: course.slug }, // URL will be /course/tally, /course/power-bi, etc.
+      props: { courseData: course }, // Pass the data to the page layout below
+    };
+  });
+}
+
+// Get the specific data for the page currently being built
+const { courseData } = Astro.props;
+---
+
+<!-- Use courseData dynamically in your HTML layout below -->
+<MainLayout title={courseData.title}>
+  <h1>{courseData.title}</h1>
+  <p>{courseData.duration}</p>
+  <!-- Render curriculum map here -->
+</MainLayout>
+```
+*Note: If you switch to SSR (Server-Side Rendering) as mentioned above, you don't need `getStaticPaths`. You can just read the URL parameter with `const { slug } = Astro.params;` and fetch the single course.*
+
+### 3. Dynamic Gallery (`src/pages/gallery.astro`)
 
 Currently, images are loaded from the local filesystem on **line 6**:
 ```javascript
@@ -75,7 +113,7 @@ const imageAssets = await response.json();
 // Ensure the API returns an array of objects with a 'src' property, e.g., [{ src: 'https://...' }]
 ```
 
-### 3. Homepage Integrations (`src/pages/index.astro`)
+### 4. Homepage Integrations (`src/pages/index.astro`)
 
 The homepage has two areas that need to be made dynamic:
 
@@ -95,7 +133,7 @@ const featuredCourses = await featuredResponse.json();
 ```
 Then, update the `.map()` loop around line 179 to iterate over `featuredCourses` instead of the hardcoded array.
 
-### 4. Form Submissions (Contact & Franchise)
+### 5. Form Submissions (Contact & Franchise)
 
 Both `src/pages/contact.astro` and `src/pages/franchise.astro` currently have dummy JavaScript submit validators that prevent the default action.
 
